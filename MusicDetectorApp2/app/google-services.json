@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "12702146754",
+    "project_id": "music-detector-app",
+    "storage_bucket": "music-detector-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12702146754:android:8967d0e12c19fc305d1b5b",
+        "android_client_info": {
+          "package_name": "com.stefan.musicdetectorapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "12702146754-4v19c073qmokpe9luhc13t4u636pe7hp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwOxdIuN7SYt3h0zZn5hhWCXPoNnzwagY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "12702146754-4v19c073qmokpe9luhc13t4u636pe7hp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
