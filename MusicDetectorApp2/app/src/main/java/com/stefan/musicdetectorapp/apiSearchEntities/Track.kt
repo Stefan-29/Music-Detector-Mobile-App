@@ -1,5 +1,9 @@
 package com.stefan.musicdetectorapp.apiSearchEntities
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Track(
     val artists: List<ArtistX>,
     val hub: Hub,
@@ -11,4 +15,4 @@ data class Track(
     val title: String,
     val type: String,
     val url: String
-)
+) : Parcelable

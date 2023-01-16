@@ -10,5 +10,7 @@
     <string name="song_duration">Song Duration</string>
     <string name="no_saved_songs">There is no saved songs</string>
     <string name="sign_in_prompt">Sign In First</string>
-    <string name="default_web_client_id">default sign in</string>
+    <string name="insert">Insert</string>
+    <string name="open_url">Open Song</string>
+    <!--    <string name="default_web_client_id">default sign in</string>-->
 </resources>

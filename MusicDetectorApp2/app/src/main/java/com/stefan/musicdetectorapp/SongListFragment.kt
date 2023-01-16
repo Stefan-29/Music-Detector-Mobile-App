@@ -1,11 +1,11 @@
 package com.stefan.musicdetectorapp
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -42,20 +42,27 @@ class SongListFragment : Fragment() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    companion object {
-        fun newInstance(songs: List<Song>): SongListFragment {
-            val fragment = SongListFragment()
-            val args = Bundle()
-            args.putParcelableArrayList("songs", ArrayList(songs))
-            fragment.arguments = args
-            return fragment
-        }
-    }
+//    companion object {
+//        fun newInstance(songs: List<Song>): SongListFragment {
+//            val fragment = SongListFragment()
+//            val args = Bundle()
+//            args.putParcelableArrayList("songs", ArrayList(songs))
+//            fragment.arguments = args
+//            return fragment
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         songs = ArrayList()
         songAdapter = SongAdapter(songs)
+        // initialize the view model
+        viewModel = ViewModelProvider(this).get(SongViewModel::class.java)
+
+        // retrieve the songs from the view model
+        viewModel.getSongs().observe(this, Observer {
+            songs = it as ArrayList<SearchResult>
+            songAdapter = SongAdapter(songs)
         //click to view more data
         songAdapter.setSongDataListener(object : SongAdapter.SongDataListener {
             override fun songItemClicked(song: SearchResult) {
@@ -82,38 +89,50 @@ class SongListFragment : Fragment() {
         fragmentSongListBinding = FragmentSongListBinding.inflate(inflater, container, false)
         fragmentSongListBinding.recyclerView.layoutManager = LinearLayoutManager(activity)
         fragmentSongListBinding.recyclerView.adapter = songAdapter
+        setHasOptionsMenu(true)
         return view
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.main_menu, menu)
 
-    override fun onStart() {
-        super.onStart()
-        fetchMatchedInputTerm()
-    }
+        val searchView = menu?.findItem(R.id.search)?.actionView as SearchView
+        searchView.queryHint = "Search for songs"
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val term = query
+                val region = "en-US"
+                val service = retrofit.create(MusicApi::class.java)
+                val call = service.getCurrentSongRecommendations(term, region)
+                call?.enqueue(object : Callback<SearchResult?> {
+                    override fun onResponse(
+                        call: Call<SearchResult?>,
+                        response: Response<SearchResult?>,
+                    ) {
+                        if (response.isSuccessful) {
+                            val searchResult = response.body()
+                            searchResult?.let {
+                                songs.clear()
+                                songs.add(searchResult)
+                                songAdapter.notifyDataSetChanged()
+                            }
+                        }
+                    }
 
-    private fun fetchMatchedInputTerm() {
-        val musicApi = retrofit.create(MusicApi::class.java)
-        val call = musicApi.getCurrentSongRecommendations("484129036",
-            "en-US")
-        call?.enqueue(object : Callback<SearchResult?> {
-            override fun onResponse(call: Call<SearchResult?>, response: Response<SearchResult?>) {
-                response.body()!!.let {
-                    songs.add(it)
-                }
-                songAdapter.notifyItemChanged(0)
-                }
-
-            override fun onFailure(call: Call<SearchResult?>, t: Throwable) {
-                Toast.makeText(activity, t.message, Toast.LENGTH_SHORT).show()
-
+                    override fun onFailure(call: Call<SearchResult?>, t: Throwable) {
+                        Toast.makeText(activity, "Error Occurred", Toast.LENGTH_LONG).show()
+                    }
+                })
+                return true
             }
 
-        }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+    })
 
-
-        )
-
-    }
-
+}
 }

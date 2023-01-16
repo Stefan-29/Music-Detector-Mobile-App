@@ -21,24 +21,27 @@
         android:text="@string/song_artist"
         android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/song_album_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/song_album"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/song_duration_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/song_duration"
-        android:textSize="14sp" />
 
     <Button
-        android:id="@+id/delete_button"
+        android:id="@+id/open_url_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/delete" />
+        android:text="@string/open_url"
+        android:layout_gravity="center"
+        android:onClick="openUrl" />
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/insert_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/insert" />
+
+    </LinearLayout>
 </LinearLayout>

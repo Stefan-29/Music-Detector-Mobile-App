@@ -4,6 +4,7 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.google.firebase.storage.FirebaseStorage
+import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import java.io.File
 
 class SongRepository(private val songDao: SongDao) {

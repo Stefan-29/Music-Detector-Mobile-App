@@ -4,13 +4,14 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SongViewModel(application: Application) : AndroidViewModel(application) {
     private val repository: SongRepository
-    val allSongs: LiveData<List<Song>>
+    val allSongs: LiveData<List<SearchResult>>
 
     init {
         val songsDao = SongDatabase.getDatabase(application).songDao()
@@ -20,14 +21,3 @@ class SongViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-    fun insert(song: Song) = viewModelScope.launch(Dispatchers.IO) {
-        repository.insert(song)
-    }
-
-    fun update(song: Song) = viewModelScope.launch(Dispatchers.IO) {
-        repository.update(song)
-    }
-
-    fun delete(song: Song) = viewModelScope.launch(Dispatchers.IO) {
-        repository.delete(song)
-    }}

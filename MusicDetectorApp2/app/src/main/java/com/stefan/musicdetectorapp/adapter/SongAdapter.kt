@@ -52,7 +52,7 @@ class SongAdapter (val songs: ArrayList<SearchResult>) : RecyclerView.Adapter<So
         private val artistTextView = itemView.findViewById<TextView>(R.id.song_artist_text_view)
 
         fun bind(song: SearchResult) {
-            titleTextView.text = song.tracks.hits.get(1).track.title
+            titleTextView.text = song.tracks.hits.get(0).track.title
             artistTextView.text = song.artists.hits.get(0).artist.name
         }
     }
