@@ -2,13 +2,15 @@ package com.stefan.musicdetectorapp.entity
 
 class SongRemoteDataSource internal constructor() : SongDataSource {
     override suspend fun getAllSongs(): Result<List<Song>> {
-        return try { // make network request to fetch songs from a remote server
-            val response = api.getSongs()
-            val songs = response.body() Result . Success (songs)
+        return try {
+            val response = MusicApi.getCurrentSongRecommendations()
+            val songs = response.body()
+            Result.Success(songs)
         } catch (e: Exception) {
             Result.Error(e)
         }
     }
+
 
     override suspend fun getSong(songId: Long): Result<Song> {
         return try { // make network request to fetch song with id from a remote server

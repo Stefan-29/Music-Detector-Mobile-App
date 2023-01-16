@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import com.stefan.musicdetectorapp.entity.Song
 import com.stefan.musicdetectorapp.entity.SongViewModel
 
@@ -26,7 +27,7 @@ class SongDetailFragment : Fragment() {
     private lateinit var song: Song
 
     companion object {
-        fun newInstance(song: Song): SongDetailFragment {
+        fun newInstance(song: SearchResult): SongDetailFragment {
             val fragment = SongDetailFragment()
             val args = Bundle()
             args.putParcelable("song", song)
