@@ -12,7 +12,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.stefan.musicdetectorapp.databinding.ActivityMainBinding
 import com.stefan.musicdetectorapp.entity.SongViewModel
@@ -24,7 +23,7 @@ import com.google.android.gms.tasks.Task
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-    private val GOOGLE_SIGN_IN = 1001
+//    private val GOOGLE_SIGN_IN = 1001
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var auth: FirebaseAuth
@@ -46,6 +45,8 @@ class MainActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this@MainActivity , gso)
 
+        // btn sign in google
+
         // Observe the authenticated user and update the UI accordingly
         auth.currentUser?.let {
             viewModel.fetchSavedSongs(it.uid)
@@ -54,7 +55,8 @@ class MainActivity : AppCompatActivity() {
 
         // Set click listener for Google sign in button
         binding.googleSignInButton.setOnClickListener {
-            signInGoogle()
+            val signInIntent = auth.getProviderClient(GoogleAuthProvider.PROVIDER_ID).signInIntent
+            startActivityForResult(signInIntent, GOOGLE_SIGN_IN)
         }
 
         // Set click listener for sign out button
@@ -81,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+    // sign in google
     private fun signInGoogle(){
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)
@@ -106,12 +109,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(account: GoogleSignInAccount) {
-        if (account != null) {
+    private fun updateUI(user: GoogleSignInAccount?) {
+        if (user != null) {
             // If user is signed in, show the list of saved songs or a message indicating that there are no saved songs
             binding.googleSignInButton.isVisible = false
             binding.signOutButton.isVisible = true
-            viewModel.fetchSavedSongs(account.uid)
+            viewModel.fetchSavedSongs(user.uid)
         } else {
             // If user is not signed in, show the sign in button
             binding.googleSignInButton.isVisible = true
