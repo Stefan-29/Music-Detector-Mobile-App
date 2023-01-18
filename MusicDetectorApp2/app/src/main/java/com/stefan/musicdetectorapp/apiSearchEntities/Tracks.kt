@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Tracks(
-    val hits: List<HitX>
+    val hits: ArrayList<HitX>
 ) : Parcelable

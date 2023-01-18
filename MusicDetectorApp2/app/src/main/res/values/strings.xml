@@ -12,5 +12,6 @@
     <string name="sign_in_prompt">Sign In First</string>
     <string name="insert">Insert</string>
     <string name="open_url">Open Song</string>
+    <string name="song_subtitle">Song Subtitle</string>
     <!--    <string name="default_web_client_id">default sign in</string>-->
 </resources>

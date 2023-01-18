@@ -126,31 +126,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == GOOGLE_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val googleAuthCredential = GoogleAuthProvider.getCredential(task.getResult(
-                    ApiException::class.java)?.idToken, null)
-                auth.signInWithCredential(googleAuthCredential).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        // Login successful, update UI with the signed-in user's information
-                        val user = auth.currentUser
-                        updateUI(user)
-                    } else {
-                        // If sign in fails, display a message to the user.
-                        Toast.makeText(baseContext, "Authentication failed.", Toast.LENGTH_SHORT)
-                            .show()
-                        updateUI(null)
-                    }
-                }
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
-                updateUI(null)
-            }
-        }
-    }
 }

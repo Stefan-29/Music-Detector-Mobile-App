@@ -11,15 +11,15 @@
         android:id="@+id/song_title_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:textSize="24sp"
         android:text="@string/song_title"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/song_artist_text_view"
+        android:id="@+id/song_subtitle_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/song_artist"
-        android:textSize="14sp" />
+        android:text="@string/song_subtitle"
+        android:textSize="18sp" />
 
 </LinearLayout>
