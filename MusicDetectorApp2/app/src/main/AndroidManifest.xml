@@ -38,13 +38,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SignUpActivity"
-            android:theme="@style/Theme.Design.Light.NoActionBar">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".SplashActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">

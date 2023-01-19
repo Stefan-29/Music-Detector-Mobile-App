@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
-import com.stefan.musicdetectorapp.entity.Song
 import com.stefan.musicdetectorapp.entity.SongViewModel
 
 // TODO: Rename parameter arguments, choose names that match

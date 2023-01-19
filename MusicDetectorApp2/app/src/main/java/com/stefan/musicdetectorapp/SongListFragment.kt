@@ -4,24 +4,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.stefan.musicdetectorapp.adapter.SongAdapter
-import com.stefan.musicdetectorapp.apiSearchEntities.Hit
 import com.stefan.musicdetectorapp.apiSearchEntities.HitX
-import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import com.stefan.musicdetectorapp.databinding.FragmentSongListBinding
-import com.stefan.musicdetectorapp.entity.MusicApi
-import com.stefan.musicdetectorapp.entity.Song
 import com.stefan.musicdetectorapp.entity.SongViewModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class SongListFragment : Fragment() {
     private lateinit var songs: ArrayList<HitX>
