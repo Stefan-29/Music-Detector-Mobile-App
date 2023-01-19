@@ -42,7 +42,6 @@ class SongDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_song_detail, container, false)
         val titleTextView = view.findViewById<TextView>(R.id.song_title_text_view)
-        val artistTextView = view.findViewById<TextView>(R.id.song_artist_text_view)
         val openUrlButton = view.findViewById<Button>(R.id.open_url_button)
         val songUrl = song.tracks.hits.get(0).track.url
         openUrlButton.setOnClickListener {

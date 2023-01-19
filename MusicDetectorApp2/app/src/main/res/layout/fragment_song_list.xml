@@ -32,14 +32,10 @@
         android:layout_gravity="bottom|end"
         android:backgroundTint="#ebc087"
         android:src="@drawable/ic_baseline_logout_24"
-        app:borderColor="@color/colorPrimary"
         app:borderWidth="2dp"
         app:elevation="6dp"
         app:fabSize="auto"
-        app:layout_anchor="bottom|end"
         app:layout_anchorGravity="bottom|end|center"
         app:pressedTranslationZ="12dp"
-        app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.SmallComponent" />
-
-
+        app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.SmallComponent"/>
 </FrameLayout>
