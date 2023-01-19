@@ -38,10 +38,9 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         auth = FirebaseAuth.getInstance()
         auth = Firebase.auth
-
+        fragmentLoginBinding = FragmentLoginBinding.inflate(layoutInflater)
         fragmentLoginBinding.btnLogin.setOnClickListener{
             val email = R.id.txt_Email.toString()
             val password = R.id.txt_password.toString()
