@@ -26,6 +26,10 @@ android {
         }
     }
 
+    dataBinding {
+        enabled = true
+    }
+
     buildFeatures {
         viewBinding true
     }
@@ -39,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.databinding:databinding-runtime:7.3.1'
     apply plugin: 'kotlin-kapt'
     def viewModel_version = "2.2.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel_version"

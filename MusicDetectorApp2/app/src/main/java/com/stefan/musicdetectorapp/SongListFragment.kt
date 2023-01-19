@@ -23,19 +23,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [SongListFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class SongListFragment : Fragment() {
     private lateinit var songs: ArrayList<HitX>
     private lateinit var trackHits: ArrayList<HitX>
@@ -97,6 +84,14 @@ class SongListFragment : Fragment() {
         })
         super.onCreateOptionsMenu(menu, inflater)
     }
+    companion object {
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(): SongListFragment {
+            return SongListFragment()
+        }
+    }
+
 
 //    private fun getCurrentSongRecommendations(query: String) {
 //        val musicApi = retrofit.create(MusicApi::class.java)

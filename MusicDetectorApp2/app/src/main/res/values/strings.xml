@@ -13,5 +13,12 @@
     <string name="insert">Insert</string>
     <string name="open_url">Open Song</string>
     <string name="song_subtitle">Song Subtitle</string>
+    <string name="str_pasword">Password</string>
+    <string name="str_email">Email</string>
+    <string name="msg_err_email_empty">Please fill up the email</string>
+    <string name="msg_err_pass_empty">Please fill up the password</string>
+    <string name="err_invalid_login">Login Failed</string>
+    <string name="successSignUp">Sign Up Succesful</string>
+    <string name="msg_failed_signup">Failed to Sign Up</string>
     <!--    <string name="default_web_client_id">default sign in</string>-->
 </resources>
