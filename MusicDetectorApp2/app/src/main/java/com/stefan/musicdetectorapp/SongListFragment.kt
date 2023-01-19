@@ -7,6 +7,7 @@ import android.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.stefan.musicdetectorapp.adapter.SongAdapter
 import com.stefan.musicdetectorapp.apiSearchEntities.HitX
 import com.stefan.musicdetectorapp.databinding.FragmentSongListBinding
@@ -18,6 +19,7 @@ class SongListFragment : Fragment() {
     private lateinit var songAdapter: SongAdapter
     private lateinit var viewModel: SongViewModel
     private lateinit var fragmentSongListBinding: FragmentSongListBinding
+    private lateinit var auth : FirebaseAuth
 
 
 //    companion object {
@@ -33,6 +35,16 @@ class SongListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        auth = FirebaseAuth.getInstance()
+        fragmentSongListBinding.tvEmail.text = "John Doe"
+        fragmentSongListBinding.btnLogout.setOnClickListener {
+            auth.signOut()
+            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+            fragmentTransaction?.replace(R.id.fragment_container,LoginFragment.newInstance())
+            fragmentTransaction?.addToBackStack(null)
+            fragmentTransaction?.commit()
+
+        }
     }
 
 
@@ -80,6 +92,8 @@ class SongListFragment : Fragment() {
             return SongListFragment()
         }
     }
+
+
 
 
 //    private fun getCurrentSongRecommendations(query: String) {
