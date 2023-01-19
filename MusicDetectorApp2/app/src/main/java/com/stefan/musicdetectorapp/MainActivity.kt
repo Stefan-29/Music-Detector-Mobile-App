@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val intent = Intent(this@MainActivity, SongListFragment::class.java)
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, SongListFragment.newInstance())
+        fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
     }

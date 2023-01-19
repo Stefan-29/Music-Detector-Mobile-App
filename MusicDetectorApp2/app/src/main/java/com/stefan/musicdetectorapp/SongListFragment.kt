@@ -40,11 +40,7 @@ class SongListFragment : Fragment() {
         fragmentSongListBinding.tvEmail.text = "John Doe"
         fragmentSongListBinding.btnLogout.setOnClickListener {
             auth.signOut()
-            val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
-            fragmentTransaction?.addToBackStack(null)
-            fragmentTransaction?.commit()
-
-            val intent = Intent(activity,MainActivity::class.java)
+            val intent = Intent(activity,LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
 

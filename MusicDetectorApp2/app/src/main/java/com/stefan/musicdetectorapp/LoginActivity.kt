@@ -103,7 +103,9 @@ class LoginActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken , null)
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful){
-                val intent : Intent = Intent(this@LoginActivity , SongListFragment::class.java)
+                val intent = Intent(this@LoginActivity , MainActivity::class.java)
+                startActivity(intent)
+                this.finish()
             }else{
                 Toast.makeText(this@LoginActivity, it.exception.toString() , Toast.LENGTH_SHORT).show()
 
