@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">تطبيق مصفاة الموسيقى</string>
+    <string name="sign_out">تسجيل الخروج</string>
+    <string name="song_title">عنوان الأغنية</string>
+    <string name="open_url">فتح الأغنية</string>
+    <string name="song_subtitle">العنوان الفرعي للأغنية</string>
+    <string name="welcome">أهلاً بك</string>
+    <string name="login_header">يرجى تسجيل الدخول للاستماع~</string>
+    <string name="google_login">تسجيل الدخول باستخدام جوجل</string>
+    <string name="play">شغل موسيقاك الخاصة</string>
+    <string name="username_welcome">أهلاً بك، اسم المستخدم</string>
+</resources>

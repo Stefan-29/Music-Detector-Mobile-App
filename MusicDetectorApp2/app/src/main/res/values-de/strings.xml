@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Musikerkennungs-App</string>
+    <string name="sign_out">Abmelden</string>
+    <string name="song_title">Liedtitel</string>
+    <string name="open_url">Lied öffnen</string>
+    <string name="song_subtitle">Untertitel des Liedes</string>
+    <string name="welcome">Willkommen</string>
+    <string name="login_header">Bitte melden Sie sich an, um zuzuhören~</string>
+    <string name="google_login">MIT GOOGLE ANMELDEN</string>
+    <string name="play">Spiele deine eigene Musik</string>
+    <string name="username_welcome">Willkommen, Benutzername</string>
+</resources>

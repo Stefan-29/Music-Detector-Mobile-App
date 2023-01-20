@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplicativo Detector de Música</string>
+    <string name="sign_out">Sair</string>
+    <string name="song_title">Título da música</string>
+    <string name="open_url">Abrir música</string>
+    <string name="song_subtitle">Subtítulo da música</string>
+    <string name="welcome">Bem-vindo</string>
+    <string name="login_header">Por favor, faça login para ouvir~</string>
+    <string name="google_login">FAZER LOGIN COM O GOOGLE</string>
+    <string name="play">Tocar sua própria música</string>
+    <string name="username_welcome">Bem-vindo, nome de usuário</string>
+</resources>

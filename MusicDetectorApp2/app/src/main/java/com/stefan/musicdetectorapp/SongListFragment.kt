@@ -170,11 +170,11 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
         val call = musicApi.getCurrentSongRecommendations(query, "en-US")
         call?.enqueue(object : Callback<Tracks?> {
             override fun onResponse(call: Call<Tracks?>, response: Response<Tracks?>) {
-                if (response.isSuccessful) {
+                if (response.isSuccessful && response!=null) {
                     response.body()!!.hits.let {
                         trackHits.addAll(it)
-                        Log.d("test",it.toString())
                     }
+
                     songAdapter.notifyItemChanged(0)
                 } else {
                     Toast.makeText(activity, "Error Occured", Toast.LENGTH_SHORT).show()

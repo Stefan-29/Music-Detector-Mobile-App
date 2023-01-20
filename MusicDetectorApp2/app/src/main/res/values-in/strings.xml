@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aplikasi Detektor Musik</string>
+    <string name="sign_out">Keluar</string>
+    <string name="song_title">Judul Lagu</string>
+    <string name="open_url">Buka Lagu</string>
+    <string name="song_subtitle">Subjudul Lagu</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="login_header">Silakan Login untuk Mendengarkan~</string>
+    <string name="google_login">LOGIN DENGAN GOOGLE</string>
+    <string name="play">Mainkan Musikmu Sendiri</string>
+    <string name="username_welcome">Selamat datang, nama pengguna</string>
+</resources>

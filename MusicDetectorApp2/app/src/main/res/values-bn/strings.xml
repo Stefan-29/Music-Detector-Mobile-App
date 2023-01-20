@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">মিউজিক ডিটেক্টর অ্যাপ</string>
+    <string name="sign_out">সাইন আউট</string>
+    <string name="song_title">গানের শিরোনাম</string>
+    <string name="open_url">গান খুলুন</string>
+    <string name="song_subtitle">গানের সাবটাইটেল</string>
+    <string name="welcome">স্বাগতম</string>
+    <string name="login_header">শুরু করতে লগইন করুন~</string>
+    <string name="google_login">গুগল দিয়ে লগইন করুন</string>
+    <string name="play">আপনার নিজের সঙ্গীত শুরু করুন</string>
+    <string name="username_welcome">স্বাগতম, ব্যবহারকারীর নাম</string>
+</resources>

@@ -1,5 +1,6 @@
 package com.stefan.musicdetectorapp.entity
 
+import com.stefan.musicdetectorapp.apiSearchEntities.HitX
 import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import com.stefan.musicdetectorapp.apiSearchEntities.Tracks
 import retrofit2.Call

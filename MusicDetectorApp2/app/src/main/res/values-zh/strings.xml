@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">音乐检测应用程序</string>
+    <string name="sign_out">登出</string>
+    <string name="song_title">歌曲标题</string>
+    <string name="open_url">打开歌曲</string>
+    <string name="song_subtitle">歌曲副标题</string>
+    <string name="welcome">欢迎</string>
+    <string name="login_header">请登录以听~</string>
+    <string name="google_login">使用 GOOGLE 登录</string>
+    <string name="play">播放你自己的音乐</string>
+    <string name="username_welcome">欢迎，用户名</string>
+</resources>

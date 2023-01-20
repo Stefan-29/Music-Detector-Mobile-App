@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Application de détection de musique</string>
+    <string name="sign_out">Se déconnecter</string>
+    <string name="song_title">Titre de la chanson</string>
+    <string name="open_url">Ouvrir la chanson</string>
+    <string name="song_subtitle">Sous-titre de la chanson</string>
+    <string name="welcome">Bienvenue</string>
+    <string name="login_header">Veuillez vous connecter pour écouter~</string>
+    <string name="google_login">SE CONNECTER AVEC GOOGLE</string>
+    <string name="play">Jouez votre propre musique</string>
+    <string name="username_welcome">Bienvenue, nom d\'utilisateur</string>
+</resources>

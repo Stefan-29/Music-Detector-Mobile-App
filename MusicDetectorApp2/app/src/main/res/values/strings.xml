@@ -1,24 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Music Detector App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_out">Sign Out</string>
-    <string name="delete">Delete</string>
     <string name="song_title">Song Title</string>
-    <string name="song_artist">Song Artist</string>
-    <string name="song_album">Song Album</string>
-    <string name="song_duration">Song Duration</string>
-    <string name="no_saved_songs">There is no saved songs</string>
-    <string name="sign_in_prompt">Sign In First</string>
-    <string name="insert">Insert</string>
     <string name="open_url">Open Song</string>
     <string name="song_subtitle">Song Subtitle</string>
-    <string name="str_pasword">Password</string>
-    <string name="str_email">Email</string>
-    <string name="msg_err_email_empty">Please fill up the email</string>
-    <string name="msg_err_pass_empty">Please fill up the password</string>
-    <string name="err_invalid_login">Login Failed</string>
-    <string name="successSignUp">Sign Up Succesful</string>
-    <string name="msg_failed_signup">Failed to Sign Up</string>
+    <string name="welcome">Welcome</string>
+    <string name="login_header">Please Login to Listen~</string>
+    <string name="google_login">LOGIN WITH GOOGLE</string>
+    <string name="play">Play Your Own Music</string>
+    <string name="username_welcome">Welcome, username</string>
     <!--    <string name="default_web_client_id">default sign in</string>-->
 </resources>

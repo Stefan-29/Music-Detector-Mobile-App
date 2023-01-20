@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Приложение для определения музыки</string>
+    <string name="sign_out">Выйти</string>
+    <string name="song_title">Название песни</string>
+    <string name="open_url">Открыть песню</string>
+    <string name="song_subtitle">Подзаголовок песни</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="login_header">Пожалуйста, войдите, чтобы послушать~</string>
+    <string name="google_login">ВОЙТИ С ПОМОЩЬЮ GOOGLE</string>
+    <string name="play">Воспроизведите свою собственную музыку</string>
+    <string name="username_welcome">Добро пожаловать, имя пользователя</string>
+</resources>
