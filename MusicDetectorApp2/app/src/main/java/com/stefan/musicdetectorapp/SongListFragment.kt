@@ -14,14 +14,13 @@ import com.stefan.musicdetectorapp.apiSearchEntities.HitX
 import com.stefan.musicdetectorapp.databinding.FragmentSongListBinding
 import com.stefan.musicdetectorapp.entity.SongViewModel
 
-class SongListFragment : Fragment() {
-    private lateinit var songs: ArrayList<HitX>
+class SongListFragment : Fragment(R.layout.fragment_song_list) {
     private lateinit var trackHits: ArrayList<HitX>
     private lateinit var songAdapter: SongAdapter
     private lateinit var viewModel: SongViewModel
     private lateinit var fragmentSongListBinding: FragmentSongListBinding
-    private lateinit var auth : FirebaseAuth
-
+    private lateinit var auth: FirebaseAuth
+    private lateinit var search: SearchView
 
 //    companion object {
 //        fun newInstance(songs: List<Song>): SongListFragment {
@@ -40,17 +39,28 @@ class SongListFragment : Fragment() {
         fragmentSongListBinding.tvEmail.text = "John Doe"
         fragmentSongListBinding.btnLogout.setOnClickListener {
             auth.signOut()
-            val intent = Intent(activity,LoginActivity::class.java)
+            val intent = Intent(activity, LoginActivity::class.java)
             startActivity(intent)
             activity?.finish()
-
         }
+        songAdapter.setSongDataListener(object : SongAdapter.SongDataListener {
+            override fun songItemClicked(trackHit: HitX) {
+                val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
+                fragmentTransaction?.replace(R.id.fragment_container,
+                    SongDetailFragment.newInstance(trackHit))
+                fragmentTransaction?.addToBackStack(null)
+                fragmentTransaction?.commit()
+
+            }
+
+        })
+
     }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         fragmentSongListBinding = FragmentSongListBinding.inflate(inflater, container, false)
         return fragmentSongListBinding.root
@@ -59,7 +69,8 @@ class SongListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))
+        viewModel = ViewModelProvider(this,
+            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))
             .get(SongViewModel::class.java)
         viewModel.songs.observe(viewLifecycleOwner, Observer {
             songAdapter = SongAdapter(trackHits)
@@ -70,7 +81,7 @@ class SongListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
-        val search = menu.findItem(R.id.search).actionView as SearchView
+        search = menu.findItem(R.id.search).actionView as SearchView
         search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
@@ -85,6 +96,7 @@ class SongListFragment : Fragment() {
         })
         super.onCreateOptionsMenu(menu, inflater)
     }
+
     companion object {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
@@ -92,8 +104,6 @@ class SongListFragment : Fragment() {
             return SongListFragment()
         }
     }
-
-
 
 
 //    private fun getCurrentSongRecommendations(query: String) {

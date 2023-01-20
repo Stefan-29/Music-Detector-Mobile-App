@@ -15,10 +15,10 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/song_artist_text_view"
+        android:id="@+id/song_subtitle_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/song_artist"
+        android:text="@string/song_subtitle"
         android:textSize="18sp" />
 
 

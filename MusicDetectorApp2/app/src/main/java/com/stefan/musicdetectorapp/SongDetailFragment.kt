@@ -9,13 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import com.stefan.musicdetectorapp.apiSearchEntities.HitX
 import com.stefan.musicdetectorapp.apiSearchEntities.SearchResult
 import com.stefan.musicdetectorapp.entity.SongViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -24,13 +24,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class SongDetailFragment : Fragment() {
     private lateinit var viewModel: SongViewModel
-    private lateinit var song: SearchResult
+    private var trackHit: HitX? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            song = it.getParcelable(ARG_PARAM1)!!
+            trackHit = it.getParcelable(ARG_PARAM1)!!
         }
     }
 
@@ -42,8 +42,11 @@ class SongDetailFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_song_detail, container, false)
         val titleTextView = view.findViewById<TextView>(R.id.song_title_text_view)
+        val subTextView = view.findViewById<TextView>(R.id.song_subtitle_text_view)
+        titleTextView.text = trackHit?.track?.title
+        subTextView.text = trackHit?.track?.subtitle
         val openUrlButton = view.findViewById<Button>(R.id.open_url_button)
-        val songUrl = song.tracks.hits.get(0).track.url
+        val songUrl = trackHit?.track?.url
         openUrlButton.setOnClickListener {
             val webUrl = Uri.parse(songUrl);
             val webIntent = Intent(Intent.ACTION_VIEW, webUrl);
@@ -56,10 +59,10 @@ class SongDetailFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(song: SearchResult) =
+        fun newInstance(trackHitX: HitX) =
             SongDetailFragment().apply {
                 arguments = Bundle().apply {
-                    putParcelable(ARG_PARAM1, song)
+                    putParcelable(ARG_PARAM1, trackHitX)
                 }
             }
     }
