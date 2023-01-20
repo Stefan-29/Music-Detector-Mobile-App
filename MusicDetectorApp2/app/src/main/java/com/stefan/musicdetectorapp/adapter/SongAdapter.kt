@@ -40,7 +40,7 @@ class SongAdapter (var trackHits: ArrayList<HitX>)
     }
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val titleTextView = itemView.findViewById<TextView>(R.id.song_title_text_view)
-        private val subTextView = itemView.findViewById<TextView>(R.id.song_artist_text_view)
+        private val subTextView = itemView.findViewById<TextView>(R.id.song_subtitle_text_view)
 
         fun bind(trackHit: HitX) {
             titleTextView.text = trackHit.track.title

@@ -23,7 +23,6 @@ private const val ARG_PARAM1 = "param1"
  * create an instance of this fragment.
  */
 class SongDetailFragment : Fragment() {
-    private lateinit var viewModel: SongViewModel
     private var trackHit: HitX? = null
 
 
@@ -67,18 +66,4 @@ class SongDetailFragment : Fragment() {
             }
     }
 
-//    override fun onActivityCreated(savedInstanceState: Bundle?) {
-//        super.onActivityCreated(savedInstanceState)
-//        viewModel = ViewModelProvider (this).get(
-//            SongViewModel::class.java) arguments ?. getParcelable < Song >("song")?.let {
-//            song = it
-//            val titleTextView = view?.findViewById<TextView>(R.id.song_title_text_view)
-//            val artistTextView = view?.findViewById<TextView>(R.id.song_artist_text_view)
-//            val albumTextView = view?.findViewById<TextView>(R.id.song_album_text_view)
-//            val durationTextView =
-//                view?.findViewById<TextView>(R.id.song_duration_text_view) titleTextView ?. text = song . title artistTextView?.text =
-//                    song.artist albumTextView ?. text = song . album durationTextView?.text =
-//                    song.duration
-//        }
-//    }
 }

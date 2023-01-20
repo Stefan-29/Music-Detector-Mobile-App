@@ -2,17 +2,26 @@ package com.stefan.musicdetectorapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.stefan.musicdetectorapp.adapter.SongAdapter
 import com.stefan.musicdetectorapp.apiSearchEntities.HitX
+import com.stefan.musicdetectorapp.apiSearchEntities.Tracks
 import com.stefan.musicdetectorapp.databinding.FragmentSongListBinding
+import com.stefan.musicdetectorapp.entity.MusicApi
 import com.stefan.musicdetectorapp.entity.SongViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class SongListFragment : Fragment(R.layout.fragment_song_list) {
     private lateinit var trackHits: ArrayList<HitX>
@@ -20,7 +29,12 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
     private lateinit var viewModel: SongViewModel
     private lateinit var fragmentSongListBinding: FragmentSongListBinding
     private lateinit var auth: FirebaseAuth
-    private lateinit var search: SearchView
+     private lateinit var search: SearchView
+    val retrofit = Retrofit.Builder()
+        .baseUrl("https://shazam.p.rapidapi.com")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
 
 //    companion object {
 //        fun newInstance(songs: List<Song>): SongListFragment {
@@ -33,9 +47,10 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
 //    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
+        fragmentSongListBinding = FragmentSongListBinding.inflate(layoutInflater)
         fragmentSongListBinding.tvEmail.text = "John Doe"
         fragmentSongListBinding.btnLogout.setOnClickListener {
             auth.signOut()
@@ -43,6 +58,8 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
             startActivity(intent)
             activity?.finish()
         }
+        trackHits = ArrayList()
+        songAdapter = SongAdapter(trackHits)
         songAdapter.setSongDataListener(object : SongAdapter.SongDataListener {
             override fun songItemClicked(trackHit: HitX) {
                 val fragmentTransaction = activity?.supportFragmentManager?.beginTransaction()
@@ -69,32 +86,67 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))
-            .get(SongViewModel::class.java)
-        viewModel.songs.observe(viewLifecycleOwner, Observer {
-            songAdapter = SongAdapter(trackHits)
+//        viewModel = ViewModelProvider(this,
+//            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application))
+//            .get(SongViewModel::class.java)
+//        viewModel.songs.observe(viewLifecycleOwner, Observer {
             fragmentSongListBinding.recyclerView.layoutManager = LinearLayoutManager(context)
             fragmentSongListBinding.recyclerView.adapter = songAdapter
-        })
+//        })
     }
+
+//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+//        inflater?.inflate(R.menu.main_menu, menu)
+//        menu?.let {
+//            if (inflater != null) {
+//                super.onCreateOptionsMenu(it,inflater)
+//            }
+//        }
+//        val search = menu?.findItem(R.id.search)?.actionView as androidx.appcompat.widget.SearchView
+//        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                if (query != null) {
+//                    getCurrentSongRecommendations(query)
+//                }
+//                return true
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//                return false
+//            }
+//        })
+//        inflater?.let { super.onCreateOptionsMenu(menu, it) }
+//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.main_menu, menu)
-        search = menu.findItem(R.id.search).actionView as SearchView
-        search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        val id = item.itemId
+
+        if (id==R.id.search) {
+            search.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    viewModel.querySongs(query)
+                    getCurrentSongRecommendations(query)
                 }
-                return true
+                return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    getCurrentSongRecommendations(newText)
+                }
                 return false
             }
         })
-        super.onCreateOptionsMenu(menu, inflater)
+
+        }
+        return super.onOptionsItemSelected(item)
+
     }
 
     companion object {
@@ -105,27 +157,35 @@ class SongListFragment : Fragment(R.layout.fragment_song_list) {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val query : String = "kiss"
+        getCurrentSongRecommendations(query)
 
-//    private fun getCurrentSongRecommendations(query: String) {
-//        val musicApi = retrofit.create(MusicApi::class.java)
-//        val call = musicApi.getCurrentSongRecommendations(query, "en-US")
-//        call?.enqueue(object : Callback<SearchResult?> {
-//            override fun onResponse(call: Call<SearchResult?>, response: Response<SearchResult?>) {
-//                if (response.isSuccessful) {
-//                    val searchResult = response.body()
-//                    val artistHits = searchResult?.artists?.hits
-//                    val trackHits = searchResult?.tracks?.hits
-//                    songAdapter.updateData(searchResult, artistHits, trackHits)
-//                } else {
-//                    Toast.makeText(requireContext(), "Error Occured", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<SearchResult?>, t: Throwable) {
-//                Toast.makeText(requireContext(), "Error Occured", Toast.LENGTH_SHORT).show()
-//            }
-//        })
-//    }
+    }
+
+
+    private fun getCurrentSongRecommendations(query: String) {
+        val musicApi = retrofit.create(MusicApi::class.java)
+        val call = musicApi.getCurrentSongRecommendations(query, "en-US")
+        call?.enqueue(object : Callback<Tracks?> {
+            override fun onResponse(call: Call<Tracks?>, response: Response<Tracks?>) {
+                if (response.isSuccessful) {
+                    response.body()!!.hits.let {
+                        trackHits.addAll(it)
+                        Log.d("test",it.toString())
+                    }
+                    songAdapter.notifyItemChanged(0)
+                } else {
+                    Toast.makeText(activity, "Error Occured", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Tracks?>, t: Throwable) {
+                Toast.makeText(activity, "Error Occured", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 }
 
 
